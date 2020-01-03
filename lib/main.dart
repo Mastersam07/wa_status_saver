@@ -6,8 +6,13 @@ void main() => runApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           appBar: AppBar(
-            title: Text('Savvy'),
-            backgroundColor: Colors.blueGrey[100],
+            leading: Icon(Icons.menu),
+            title: Text('Status Saver'),
+            backgroundColor: Colors.green[10],
+            actions: <Widget>[
+              IconButton(icon: Icon(Icons.share), onPressed: (){}),
+              IconButton(icon: Icon(Icons.help_outline), onPressed: (){})
+            ],
           ),
           body: Dashboard(),
           backgroundColor: Colors.blueGrey[100],
