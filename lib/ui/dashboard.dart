@@ -10,8 +10,12 @@ class DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      child: Text('Hello'),
+      child: TabBarView(
+        children: [
+          Icon(Icons.photo),
+          Icon(Icons.movie)
+        ],
+      ),
     );
   }
-
 }
