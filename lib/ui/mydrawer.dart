@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyNavigationDrawer extends StatelessWidget {
+
+  _launchPlayURL() async {
+    const url = 'https://flutter.dev';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -29,8 +39,7 @@ class MyNavigationDrawer extends StatelessWidget {
                 child: Icon(Icons.photo)),
             title: Text('Photos'),
             onTap: () {
-              // Update the state of the app.
-              // ...
+
             },
           ),
         ),
@@ -41,8 +50,7 @@ class MyNavigationDrawer extends StatelessWidget {
                 child: Icon(Icons.movie)),
             title: Text('Videos'),
             onTap: () {
-              // Update the state of the app.
-              // ...
+
             },
           ),
         ),
@@ -53,8 +61,7 @@ class MyNavigationDrawer extends StatelessWidget {
                 child: Icon(Icons.thumb_up)),
             title: Text('Rate Us'),
             onTap: () {
-              // Update the state of the app.
-              // ...
+              _launchPlayURL();
             },
           ),
         ),
@@ -65,8 +72,7 @@ class MyNavigationDrawer extends StatelessWidget {
                 child: Icon(Icons.settings)),
             title: Text('Settings'),
             onTap: () {
-              // Update the state of the app.
-              // ...
+
             },
           ),
         ),

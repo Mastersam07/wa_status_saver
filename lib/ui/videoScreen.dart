@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-class videoscreen extends StatelessWidget {
+class VideoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Text('Video Screen'),
+    );
   }
 }

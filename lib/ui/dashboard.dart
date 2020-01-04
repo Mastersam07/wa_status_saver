@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wa_status_saver/ui/imageScreen.dart';
+import 'package:wa_status_saver/ui/videoScreen.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -12,8 +14,8 @@ class DashboardState extends State<Dashboard> {
     return Container(
       child: TabBarView(
         children: [
-          Icon(Icons.photo),
-          Icon(Icons.movie)
+          ImageScreen(),
+          VideoScreen(),
         ],
       ),
     );
