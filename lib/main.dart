@@ -19,17 +19,29 @@ void main() => runApp(
               title: Text('Status Saver'),
               backgroundColor: Colors.green,
               actions: <Widget>[
-                IconButton(icon: Icon(Icons.share), onPressed: (){
-                  Share.share('check out my wa status downloader https://mastersam.io', subject: 'Look what I made!');
-                }),
+                IconButton(
+                    icon: Icon(Icons.share),
+                    onPressed: () {
+                      Share.share(
+                          'check out my wa status downloader https://mastersam.io',
+                          subject: 'Look what I made!');
+                    }),
                 IconButton(icon: Icon(Icons.help_outline), onPressed: () {})
               ],
-              bottom: TabBar(
-                  tabs: [
-                    Text('IMAGES'),
-                    Text('VIDEOS')
-                  ]
-              ),
+              bottom: TabBar(tabs: [
+                Container(
+                  height: 30.0,
+                  child: Text(
+                    'IMAGES',
+                  ),
+                ),
+                Container(
+                  height: 30.0,
+                  child: Text(
+                    'VIDEOS',
+                  ),
+                ),
+              ]),
             ),
             body: Dashboard(),
             backgroundColor: Colors.white,
