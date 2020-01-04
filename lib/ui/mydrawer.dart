@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyNavigationDrawer extends StatelessWidget {
+  String version = '0.0.1';
 
   _launchPlayURL() async {
     const url = 'https://flutter.dev';
@@ -11,20 +12,23 @@ class MyNavigationDrawer extends StatelessWidget {
       throw 'Could not launch $url';
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
       // Important: Remove any padding from the ListView.
       padding: EdgeInsets.zero,
       children: <Widget>[
-        DrawerHeader(
-          child: Container(
-            margin: EdgeInsets.only(bottom: 40.0),
-            width: 10.0,
-            height: 10.0,
+        UserAccountsDrawerHeader(
+          decoration: BoxDecoration(color: Colors.green),
+          accountName: Text(
+            'Status Saver',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          accountEmail: Text('Version: $version'),
+          currentAccountPicture: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.green,
               image: DecorationImage(
                 fit: BoxFit.contain,
                 image: AssetImage('assets/images/logo.png'),
@@ -36,22 +40,18 @@ class MyNavigationDrawer extends StatelessWidget {
           child: ListTile(
             leading: IconTheme(
                 data: new IconThemeData(color: Color(0xff757575)),
-                child: Icon(Icons.photo)),
+                child: Icon(Icons.photo_library)),
             title: Text('Photos'),
-            onTap: () {
-
-            },
+            onTap: () {},
           ),
         ),
         Card(
           child: ListTile(
             leading: IconTheme(
                 data: new IconThemeData(color: Color(0xff757575)),
-                child: Icon(Icons.movie)),
+                child: Icon(Icons.video_library)),
             title: Text('Videos'),
-            onTap: () {
-
-            },
+            onTap: () {},
           ),
         ),
         Card(
@@ -71,9 +71,7 @@ class MyNavigationDrawer extends StatelessWidget {
                 data: new IconThemeData(color: Color(0xff757575)),
                 child: Icon(Icons.settings)),
             title: Text('Settings'),
-            onTap: () {
-
-            },
+            onTap: () {},
           ),
         ),
       ],
