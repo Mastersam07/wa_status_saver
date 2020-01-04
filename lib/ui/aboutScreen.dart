@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class SettingScreen extends StatefulWidget {
+class AboutScreen extends StatefulWidget {
   @override
-  SettingScreenState createState() => new SettingScreenState();
+  AboutScreenState createState() => new AboutScreenState();
 }
 
-class SettingScreenState extends State<SettingScreen> {
+class AboutScreenState extends State<AboutScreen> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -18,7 +18,7 @@ class SettingScreenState extends State<SettingScreen> {
         child: new Center(
           child: new Column(
             children: <Widget>[
-              new Text('Settings Screen')
+              new Text('Hello World!')
             ],
           ),
         ),

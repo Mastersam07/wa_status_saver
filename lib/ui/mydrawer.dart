@@ -58,7 +58,16 @@ class MyNavigationDrawer extends StatelessWidget {
           child: ListTile(
             leading: IconTheme(
                 data: new IconThemeData(color: Color(0xff757575)),
-                child: Icon(Icons.thumb_up)),
+                child: Icon(Icons.info)),
+            title: Text('About Us'),
+            onTap: () {},
+          ),
+        ),
+        Card(
+          child: ListTile(
+            leading: IconTheme(
+                data: new IconThemeData(color: Color(0xff757575)),
+                child: Icon(Icons.rate_review)),
             title: Text('Rate Us'),
             onTap: () {
               _launchPlayURL();
