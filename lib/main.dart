@@ -8,6 +8,11 @@ final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 void main() => runApp(
       MaterialApp(
         debugShowCheckedModeBanner: false,
+        title: 'Savvy',
+        theme: ThemeData(
+          brightness: Brightness.light,
+          primaryColor: Colors.teal,
+        ),
         home: DefaultTabController(
           length: 2,
           child: Scaffold(
@@ -17,7 +22,7 @@ void main() => runApp(
                   icon: Icon(Icons.menu),
                   onPressed: () => _scaffoldKey.currentState.openDrawer()),
               title: Text('Status Saver'),
-              backgroundColor: Colors.green,
+              backgroundColor: Colors.teal,
               actions: <Widget>[
                 IconButton(
                     icon: Icon(Icons.share),

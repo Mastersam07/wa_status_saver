@@ -20,7 +20,7 @@ class MyNavigationDrawer extends StatelessWidget {
       padding: EdgeInsets.zero,
       children: <Widget>[
         UserAccountsDrawerHeader(
-          decoration: BoxDecoration(color: Colors.green),
+          decoration: BoxDecoration(color: Colors.teal),
           accountName: Text(
             'Status Saver',
             style: TextStyle(fontWeight: FontWeight.bold),
