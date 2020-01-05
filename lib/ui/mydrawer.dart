@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:share/share.dart';
 
 class MyNavigationDrawer extends StatelessWidget {
   String version = '0.0.1';
@@ -58,6 +59,15 @@ class MyNavigationDrawer extends StatelessWidget {
           child: ListTile(
             leading: IconTheme(
                 data: new IconThemeData(color: Color(0xff757575)),
+                child: Icon(Icons.perm_media)),
+            title: Text('Downloaded Status'),
+            onTap: () {},
+          ),
+        ),
+        Card(
+          child: ListTile(
+            leading: IconTheme(
+                data: new IconThemeData(color: Color(0xff757575)),
                 child: Icon(Icons.info)),
             title: Text('About Us'),
             onTap: () {},
@@ -71,6 +81,19 @@ class MyNavigationDrawer extends StatelessWidget {
             title: Text('Rate Us'),
             onTap: () {
               _launchPlayURL();
+            },
+          ),
+        ),
+        Card(
+          child: ListTile(
+            leading: IconTheme(
+                data: new IconThemeData(color: Color(0xff757575)),
+                child: Icon(Icons.share)),
+            title: Text('Share With Friends'),
+            onTap: () {
+              Share.share(
+                  'check out my wa status downloader https://mastersam.io',
+                  subject: 'Look what I made!');
             },
           ),
         ),
