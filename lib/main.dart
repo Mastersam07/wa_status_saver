@@ -72,9 +72,9 @@ class MyAppState extends State<MyApp> {
       }
 
       if(storagePermissionCheckInt==1){
-        finalPermission=2;
-      }else{
         finalPermission=1;
+      }else{
+        finalPermission=0;
       }
 
       return finalPermission;
@@ -97,7 +97,7 @@ class MyAppState extends State<MyApp> {
           builder: (context, status) {
             if (status.connectionState == ConnectionState.done) {
               if (status.hasData) {
-                if(status.data==2){
+                if(status.data==1){
                   return MyHome();
                 }else {
                   return Scaffold(
