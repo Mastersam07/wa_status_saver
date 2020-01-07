@@ -3,6 +3,7 @@ import 'package:wa_status_saver/ui/dashboard.dart';
 import 'package:wa_status_saver/ui/mydrawer.dart';
 import 'package:share/share.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -24,7 +25,8 @@ class MyAppState extends State<MyApp> {
 
   Future<int> checkStoragePermission() async {
     // bool result = await SimplePermissions.checkPermission(Permission.ReadExternalStorage);
-    PermissionStatus result = await PermissionHandler().checkPermissionStatus(PermissionGroup.storage);
+    PermissionStatus result = await PermissionHandler()
+        .checkPermissionStatus(PermissionGroup.storage);
     print("Checking Storage Permission " + result.toString());
     setState(() {
       _storagePermissionCheck = 1;
@@ -40,7 +42,8 @@ class MyAppState extends State<MyApp> {
 
   Future<int> requestStoragePermission() async {
     // PermissionStatus result = await SimplePermissions.requestPermission(Permission.ReadExternalStorage);
-    Map<PermissionGroup, PermissionStatus> result = await PermissionHandler().requestPermissions([PermissionGroup.storage]);
+    Map<PermissionGroup, PermissionStatus> result =
+        await PermissionHandler().requestPermissions([PermissionGroup.storage]);
     if (result.toString() == 'PermissionStatus.denied') {
       return 1;
     } else if (result.toString() == 'PermissionStatus.granted') {
@@ -50,7 +53,6 @@ class MyAppState extends State<MyApp> {
     }
   }
 
-
   @override
   void initState() {
     super.initState();
@@ -58,23 +60,22 @@ class MyAppState extends State<MyApp> {
       int storagePermissionCheckInt;
       int finalPermission;
 
-
       print("Initial Values of $_storagePermissionCheck");
-      if(_storagePermissionCheck==null || _storagePermissionCheck==0){
+      if (_storagePermissionCheck == null || _storagePermissionCheck == 0) {
         _storagePermissionCheck = await checkStoragePermission();
-      }else{
+      } else {
         _storagePermissionCheck = 1;
       }
-      if(_storagePermissionCheck==1){
+      if (_storagePermissionCheck == 1) {
         storagePermissionCheckInt = 1;
-      }else{
+      } else {
         storagePermissionCheckInt = 0;
       }
 
-      if(storagePermissionCheckInt==1){
-        finalPermission=1;
-      }else{
-        finalPermission=0;
+      if (storagePermissionCheckInt == 1) {
+        finalPermission = 1;
+      } else {
+        finalPermission = 0;
       }
 
       return finalPermission;
@@ -97,24 +98,23 @@ class MyAppState extends State<MyApp> {
           builder: (context, status) {
             if (status.connectionState == ConnectionState.done) {
               if (status.hasData) {
-                if(status.data==1){
+                if (status.data == 1) {
                   return MyHome();
-                }else {
+                } else {
                   return Scaffold(
                     body: Container(
                       decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            begin: Alignment.bottomLeft,
-                            end: Alignment.topRight,
-                            colors: [
-                              Colors.lightBlue[100],
-                              Colors.lightBlue[200],
-                              Colors.lightBlue[300],
-                              Colors.lightBlue[200],
-                              Colors.lightBlue[100],
-                            ],
-                          )
-                      ),
+                        begin: Alignment.bottomLeft,
+                        end: Alignment.topRight,
+                        colors: [
+                          Colors.lightBlue[100],
+                          Colors.lightBlue[200],
+                          Colors.lightBlue[300],
+                          Colors.lightBlue[200],
+                          Colors.lightBlue[100],
+                        ],
+                      )),
                       child: Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -122,20 +122,23 @@ class MyAppState extends State<MyApp> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(20.0),
-                              child: Text("Storage Permission Required", style: TextStyle(
-                                  fontSize: 20.0
-                              ),),
+                              child: Text(
+                                "Storage Permission Required",
+                                style: TextStyle(fontSize: 20.0),
+                              ),
                             ),
                             FlatButton(
                               padding: EdgeInsets.all(15.0),
-                              child: Text("Allow Storage Permission",style: TextStyle(
-                                  fontSize:20.0
-                              ),),
+                              child: Text(
+                                "Allow Storage Permission",
+                                style: TextStyle(fontSize: 20.0),
+                              ),
                               color: Colors.indigo,
                               textColor: Colors.white,
                               onPressed: () {
                                 setState(() {
-                                  _storagePermissionChecker = requestStoragePermission();
+                                  _storagePermissionChecker =
+                                      requestStoragePermission();
                                 });
                               },
                             )
@@ -150,17 +153,16 @@ class MyAppState extends State<MyApp> {
                   body: Container(
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          begin: Alignment.bottomLeft,
-                          end: Alignment.topRight,
-                          colors: [
-                            Colors.lightBlue[100],
-                            Colors.lightBlue[200],
-                            Colors.lightBlue[300],
-                            Colors.lightBlue[200],
-                            Colors.lightBlue[100],
-                          ],
-                        )
-                    ),
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight,
+                      colors: [
+                        Colors.lightBlue[100],
+                        Colors.lightBlue[200],
+                        Colors.lightBlue[300],
+                        Colors.lightBlue[200],
+                        Colors.lightBlue[100],
+                      ],
+                    )),
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -168,9 +170,10 @@ class MyAppState extends State<MyApp> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(20.0),
-                            child: Text("Something went wrong.. Please uninstall and Install Again.", style: TextStyle(
-                                fontSize: 20.0
-                            ),),
+                            child: Text(
+                              "Something went wrong.. Please uninstall and Install Again.",
+                              style: TextStyle(fontSize: 20.0),
+                            ),
                           ),
                         ],
                       ),
@@ -200,6 +203,8 @@ class MyHome extends StatefulWidget {
 }
 
 class _MyHomeState extends State<MyHome> {
+  var html =
+      "<h3><b>How To Use?</b></h3><p>- Check the Desired Status/Story...</p><p>- Come Back to App, Click on any Image or Video to View...</p><p>- Click the Save Button...<br />The Image/Video is Instantly saved to your Galery :)</p><p>- You can also Use Multiple Saving. [to do]</p>";
 
   @override
   Widget build(BuildContext context) {
@@ -219,7 +224,43 @@ class _MyHomeState extends State<MyHome> {
                     'check out my wa status downloader https://mastersam.io',
                     subject: 'Look what I made!');
               }),
-          IconButton(icon: Icon(Icons.help_outline), onPressed: () {})
+          IconButton(
+              icon: Icon(Icons.help_outline),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Dialog(
+                        child: Container(
+                          height: 400,
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Html(data: html),
+                                Expanded(
+                                  child: new Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: FlatButton(
+                                      child: Text(
+                                        'OK!',
+                                        style: TextStyle(color: Colors.green),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    });
+              })
         ],
         bottom: TabBar(tabs: [
           Container(

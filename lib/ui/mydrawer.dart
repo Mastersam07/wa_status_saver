@@ -41,24 +41,6 @@ class MyNavigationDrawer extends StatelessWidget {
           child: ListTile(
             leading: IconTheme(
                 data: new IconThemeData(color: Color(0xff757575)),
-                child: Icon(Icons.photo_library)),
-            title: Text('Photos'),
-            onTap: () {},
-          ),
-        ),
-        Card(
-          child: ListTile(
-            leading: IconTheme(
-                data: new IconThemeData(color: Color(0xff757575)),
-                child: Icon(Icons.video_library)),
-            title: Text('Videos'),
-            onTap: () {},
-          ),
-        ),
-        Card(
-          child: ListTile(
-            leading: IconTheme(
-                data: new IconThemeData(color: Color(0xff757575)),
                 child: Icon(Icons.perm_media)),
             title: Text('Downloaded Status'),
             onTap: () {},
