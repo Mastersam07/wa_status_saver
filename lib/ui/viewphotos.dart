@@ -18,6 +18,7 @@ class ViewPhotos extends StatefulWidget {
 
 class _ViewPhotosState extends State<ViewPhotos> {
   var filePath;
+  final String imgShare="Image.file(File(widget.imgPath),)";
 
   Future<void> _shareImage() async {
     try {
@@ -28,7 +29,7 @@ class _ViewPhotosState extends State<ViewPhotos> {
         'esys image',
         'esys.png',
         bytes.buffer.asUint8List(),
-        "Image.file(File(widget.imgPath),)",
+        imgShare,
       );
     } catch (e) {
       print('error: $e');
@@ -155,7 +156,7 @@ class _ViewPhotosState extends State<ViewPhotos> {
       }, "Share", Colors.black, Colors.white, true),
       new FabMiniMenuItem.withText(new Icon(Icons.reply), Colors.teal, 4.0,
           "Button menu", () {}, "Repost", Colors.black, Colors.white, true),
-      new FabMiniMenuItem.withText(new Icon(Icons.image), Colors.teal, 4.0,
+      new FabMiniMenuItem.withText(new Icon(Icons.wallpaper), Colors.teal, 4.0,
           "Button menu", () {}, "Set As", Colors.black, Colors.white, true),
       new FabMiniMenuItem.withText(
           new Icon(Icons.delete_outline),
