@@ -10,6 +10,10 @@ A whatsApp status saver/downloader with flutter.
 - A little knowledge of Dart and Flutter
 - Some fingers to code 😂
 
+<a href="./app-release.apk"><img src="https://playerzon.com/asset/download.png" width="200"></img></a>
+
+Don't forget to star⭐ the repo if you like what you see😉.
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
