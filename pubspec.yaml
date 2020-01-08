@@ -32,6 +32,9 @@ dependencies:
   flutter_html: ^0.11.1
   flutter_fab_dialer: ^0.1.1
   esys_flutter_share: ^1.0.2
+  thumbnails: ^1.0.1
+  chewie: ^0.9.8+1
+  video_player: ^0.10.5+1
 
 dev_dependencies:
   flutter_test:
