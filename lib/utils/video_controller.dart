@@ -30,7 +30,7 @@ class _StatusVideoState extends State<StatusVideo> {
         autoInitialize: true,
         looping: widget.looping,
         allowFullScreen: true,
-        aspectRatio: 6 / 9,
+        aspectRatio: 3 / 2,
         // autoPlay: true,
         errorBuilder: (context, errorMessage) {
           return Center(
@@ -50,12 +50,9 @@ class _StatusVideoState extends State<StatusVideo> {
             padding: EdgeInsets.only(top: 0),
             child: Hero(
               tag: widget.videoSrc,
-              child: AspectRatio(
-                aspectRatio: 6 / 10,
                 child: Chewie(
                   controller: _chewieController,
                 ),
-              ),
             ),
           ),
         ],

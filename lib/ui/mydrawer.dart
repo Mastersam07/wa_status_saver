@@ -3,10 +3,10 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
 
 class MyNavigationDrawer extends StatelessWidget {
-  String version = '0.0.1';
+  final String version = '0.3+2';
 
-  _launchPlayURL() async {
-    const url = 'https://flutter.dev';
+  _launchURL() async {
+    const url = 'https://github.com/Mastersam07/wa_status_saver';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -62,7 +62,7 @@ class MyNavigationDrawer extends StatelessWidget {
                 child: Icon(Icons.rate_review)),
             title: Text('Rate Us'),
             onTap: () {
-              _launchPlayURL();
+              _launchURL();
             },
           ),
         ),
@@ -74,7 +74,7 @@ class MyNavigationDrawer extends StatelessWidget {
             title: Text('Share With Friends'),
             onTap: () {
               Share.share(
-                  'check out my wa status downloader https://mastersam.io',
+                  'check out my wa status downloader https://bit.ly/wa_status_downloader',
                   subject: 'Look what I made!');
             },
           ),
