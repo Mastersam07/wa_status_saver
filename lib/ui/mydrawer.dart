@@ -13,6 +13,14 @@ class MyNavigationDrawer extends StatelessWidget {
       throw 'Could not launch $url';
     }
   }
+  _launchAboutURL() async {
+    const url = 'https://github.com/Mastersam07';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,18 +49,11 @@ class MyNavigationDrawer extends StatelessWidget {
           child: ListTile(
             leading: IconTheme(
                 data: new IconThemeData(color: Color(0xff757575)),
-                child: Icon(Icons.perm_media)),
-            title: Text('Downloaded Status'),
-            onTap: () {},
-          ),
-        ),
-        Card(
-          child: ListTile(
-            leading: IconTheme(
-                data: new IconThemeData(color: Color(0xff757575)),
                 child: Icon(Icons.info)),
             title: Text('About Us'),
-            onTap: () {},
+            onTap: () {
+              _launchAboutURL();
+            },
           ),
         ),
         Card(
@@ -77,15 +78,6 @@ class MyNavigationDrawer extends StatelessWidget {
                   'check out my wa status downloader https://mastersam.io',
                   subject: 'Look what I made!');
             },
-          ),
-        ),
-        Card(
-          child: ListTile(
-            leading: IconTheme(
-                data: new IconThemeData(color: Color(0xff757575)),
-                child: Icon(Icons.settings)),
-            title: Text('Settings'),
-            onTap: () {},
           ),
         ),
       ],
