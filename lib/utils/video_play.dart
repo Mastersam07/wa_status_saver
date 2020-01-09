@@ -85,6 +85,7 @@ class _PlayStatusState extends State<PlayStatus> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar:AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
@@ -92,7 +93,7 @@ class _PlayStatusState extends State<PlayStatus> {
           color: Colors.indigo,
           icon: Icon(
             Icons.close,
-            color: Colors.black,
+            color: Colors.white,
           ),
           onPressed: ()=> Navigator.of(context).pop(),
         ),
