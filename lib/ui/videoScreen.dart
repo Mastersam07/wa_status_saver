@@ -113,24 +113,6 @@ class _VideoGridState extends State<VideoGrid> {
                                     height: 280.0,
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 10.0, right: 10.0),
-                                  child: RaisedButton(
-                                    child: Text("Play Video"),
-                                    color: Colors.indigo,
-                                    textColor: Colors.white,
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        new MaterialPageRoute(
-                                            builder: (context) =>
-                                            new PlayStatus(
-                                                videoList[index])),
-                                      );
-                                    },
-                                  ),
-                                ),
                               ]);
                             } else {
                               return Center(

@@ -1,12 +1,9 @@
 import 'dart:io';
 import 'dart:typed_data';
-import 'dart:async';
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:flutter_fab_dialer/flutter_fab_dialer.dart';
-import 'package:esys_flutter_share/esys_flutter_share.dart' as eshare;
+
 
 class ViewPhotos extends StatefulWidget {
   final String imgPath;
@@ -18,23 +15,7 @@ class ViewPhotos extends StatefulWidget {
 
 class _ViewPhotosState extends State<ViewPhotos> {
   var filePath;
-  final String imgShare="Image.file(File(widget.imgPath),)";
-
-  Future<void> _shareImage() async {
-    try {
-      final ByteData bytes = await rootBundle.load(
-        "Image.file(File(widget.imgPath),)",
-      );
-      await eshare.Share.file(
-        'esys image',
-        'esys.png',
-        bytes.buffer.asUint8List(),
-        imgShare,
-      );
-    } catch (e) {
-      print('error: $e');
-    }
-  }
+  final String imgShare = "Image.file(File(widget.imgPath),)";
 
   final LinearGradient backgroundGradient = new LinearGradient(
     colors: [
@@ -91,7 +72,7 @@ class _ViewPhotosState extends State<ViewPhotos> {
                           Padding(
                             padding: EdgeInsets.all(10.0),
                           ),
-                          Text("FileManager > Downloaded Status",
+                          Text("FileManager > wa_status_saver",
                               style: TextStyle(
                                   fontSize: 16.0, color: Colors.teal)),
                           Padding(
@@ -122,17 +103,6 @@ class _ViewPhotosState extends State<ViewPhotos> {
           new Icon(Icons.sd_storage), Colors.teal, 4.0, "Button menu",
           () async {
         _onLoading(true, "");
-//                File originalImageFile1 = File(widget.imgPath);
-//
-//                Directory directory = await getExternalStorageDirectory();
-//                if(!Directory("${directory.path}/Downloaded Status/Images").existsSync()){
-//                  Directory("${directory.path}/Downloaded Status/Images").createSync(recursive: true);
-//                }
-//                String path = directory.path;
-//                String curDate = DateTime.now().toString();
-//                String newFileName = "$path/Downloaded Status/Images/IMG-$curDate.jpg";
-//                print(newFileName);
-//                await originalImageFile1.copy(newFileName);
 
         Uri myUri = Uri.parse(widget.imgPath);
         File originalImageFile = new File.fromUri(myUri);
@@ -150,10 +120,8 @@ class _ViewPhotosState extends State<ViewPhotos> {
         _onLoading(false,
             "If Image not available in gallary\n\nYou can find all images at");
       }, "Save", Colors.black, Colors.white, true),
-      new FabMiniMenuItem.withText(
-          new Icon(Icons.share), Colors.teal, 4.0, "Button menu", () {
-        _shareImage();
-      }, "Share", Colors.black, Colors.white, true),
+      new FabMiniMenuItem.withText(new Icon(Icons.share), Colors.teal, 4.0,
+          "Button menu", () {}, "Share", Colors.black, Colors.white, true),
       new FabMiniMenuItem.withText(new Icon(Icons.reply), Colors.teal, 4.0,
           "Button menu", () {}, "Repost", Colors.black, Colors.white, true),
       new FabMiniMenuItem.withText(new Icon(Icons.wallpaper), Colors.teal, 4.0,

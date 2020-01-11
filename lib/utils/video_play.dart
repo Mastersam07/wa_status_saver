@@ -12,23 +12,22 @@ class PlayStatus extends StatefulWidget {
 }
 
 class _PlayStatusState extends State<PlayStatus> {
-
   @override
   void initState() {
     super.initState();
-    print('Video file you are looking for:'+widget.videoFile);
+    print('Video file you are looking for:' + widget.videoFile);
   }
 
   void dispose() {
     super.dispose();
   }
 
-  void _onLoading(bool t,String str){
-    if(t){
+  void _onLoading(bool t, String str) {
+    if (t) {
       showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (BuildContext context){
+          builder: (BuildContext context) {
             return SimpleDialog(
               children: <Widget>[
                 Center(
@@ -38,14 +37,13 @@ class _PlayStatusState extends State<PlayStatus> {
                 ),
               ],
             );
-          }
-      );
-    }else{
+          });
+    } else {
       Navigator.pop(context);
       showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (BuildContext context){
+          builder: (BuildContext context) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: SimpleDialog(
@@ -55,21 +53,32 @@ class _PlayStatusState extends State<PlayStatus> {
                       padding: EdgeInsets.all(15.0),
                       child: Column(
                         children: <Widget>[
-                          Text("Great, Saved in Gallary", style: TextStyle(
-                              fontSize:20,
-                              fontWeight: FontWeight.bold
+                          Text(
+                            "Great, Saved in Gallary",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
+                          Padding(
+                            padding: EdgeInsets.all(10.0),
                           ),
-                          Padding(padding: EdgeInsets.all(10.0),),
-                          Text(str,style:TextStyle( fontSize:16.0, )),
-                          Padding(padding: EdgeInsets.all(10.0),),
-                          Text("FileManager > Downloaded Status",style:TextStyle( fontSize:16.0, color: Colors.teal )),
-                          Padding(padding: EdgeInsets.all(10.0),),
+                          Text(str,
+                              style: TextStyle(
+                                fontSize: 16.0,
+                              )),
+                          Padding(
+                            padding: EdgeInsets.all(10.0),
+                          ),
+                          Text("FileManager > wa_status_saver",
+                              style: TextStyle(
+                                  fontSize: 16.0, color: Colors.teal)),
+                          Padding(
+                            padding: EdgeInsets.all(10.0),
+                          ),
                           MaterialButton(
                             child: Text("Close"),
-                            color:Colors.teal,
+                            color: Colors.teal,
                             textColor: Colors.white,
-                            onPressed:  ()=> Navigator.pop(context),
+                            onPressed: () => Navigator.pop(context),
                           )
                         ],
                       ),
@@ -85,53 +94,50 @@ class _PlayStatusState extends State<PlayStatus> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         leading: IconButton(
-          color: Colors.indigo,
+          color: Colors.white,
           icon: Icon(
             Icons.close,
-            color: Colors.black,
+            color: Colors.white,
           ),
-          onPressed: ()=> Navigator.of(context).pop(),
-        ),
-        title: Container(
-          padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 10.0),
-          child:  FlatButton.icon(
-            color:Colors.indigo,
-            textColor: Colors.white,
-            icon: Icon(Icons.file_download),
-            padding: EdgeInsets.all(10.0),
-            label: Text('Download', style: TextStyle(
-                fontSize:16.0
-            ),), //`Text` to display
-            onPressed: () async{
-              _onLoading(true,"");
-
-              File originalVideoFile = File(widget.videoFile);
-              Directory directory = await getExternalStorageDirectory();
-              if(!Directory("${directory.path}/Downloaded Status/Videos").existsSync()){
-                Directory("${directory.path}/Downloaded Status/Videos").createSync(recursive: true);
-              }
-              String path = directory.path;
-              String curDate = DateTime.now().toString();
-              String newFileName = "$path/Downloaded Status/Videos/VIDEO-$curDate.mp4";
-              print(newFileName);
-              await originalVideoFile.copy(newFileName);
-
-              _onLoading(false,"If Video not available in gallary\n\nYou can find all videos at");
-            },
-          ),
+          onPressed: () => Navigator.of(context).pop(),
         ),
       ),
       body: Container(
         child: StatusVideo(
-          videoPlayerController: VideoPlayerController.file(File(widget.videoFile)),
+          videoPlayerController:
+          VideoPlayerController.file(File(widget.videoFile)),
           looping: true,
           videoSrc: widget.videoFile,
         ),
       ),
+      floatingActionButton: new FloatingActionButton(
+          backgroundColor: Colors.teal,
+          child: Icon(Icons.save),
+          onPressed: () async {
+            _onLoading(true, "");
+
+            File originalVideoFile = File(widget.videoFile);
+            Directory directory = await getExternalStorageDirectory();
+            if (!Directory("${directory.path}/wa_status_saver/Videos")
+                .existsSync()) {
+              Directory("${directory.path}/wa_status_saver/Videos")
+                  .createSync(recursive: true);
+            }
+            String path = directory.path;
+            String curDate = DateTime.now().toString();
+            String newFileName =
+                "$path/wa_status_saver/Videos/VIDEO-$curDate.mp4";
+            print(newFileName);
+            await originalVideoFile.copy(newFileName);
+
+            _onLoading(false,
+                "If Video not available in gallary\n\nYou can find all videos at");
+          }),
     );
   }
 }
