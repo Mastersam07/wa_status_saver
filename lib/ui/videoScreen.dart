@@ -4,7 +4,7 @@ import 'package:thumbnails/thumbnails.dart';
 import 'package:wa_status_saver/utils/video_play.dart';
 
 final Directory _videoDir =
-new Directory('/storage/emulated/0/WhatsApp/Media/.Statuses');
+    new Directory('/storage/emulated/0/WhatsApp/Media/.Statuses');
 
 class VideoScreen extends StatefulWidget {
   @override
@@ -20,13 +20,10 @@ class VideoScreenState extends State<VideoScreen> {
   @override
   Widget build(BuildContext context) {
     if (!Directory("${_videoDir.path}").existsSync()) {
-      return Container(
-        padding: EdgeInsets.only(bottom: 60.0),
-        child: Center(
-          child: Text(
-            "Install WhatsApp\nYour Friend's Status will be available here.",
-            style: TextStyle(fontSize: 18.0),
-          ),
+      return Center(
+        child: Text(
+          "Install WhatsApp\nYour Friend's Status will be available here.",
+          style: TextStyle(fontSize: 18.0),
         ),
       );
     } else {
@@ -50,7 +47,7 @@ class _VideoGridState extends State<VideoGrid> {
     String thumb = await Thumbnails.getThumbnail(
         videoFile: videoPathUrl,
         imageType:
-        ThumbFormat.PNG, //this image will store in created folderpath
+            ThumbFormat.PNG, //this image will store in created folderpath
         quality: 10);
     return thumb;
   }
@@ -66,20 +63,23 @@ class _VideoGridState extends State<VideoGrid> {
     if (videoList != null) {
       if (videoList.length > 0) {
         return Container(
-          padding: EdgeInsets.only(bottom: 60.0),
+          margin: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
           child: GridView.builder(
             itemCount: videoList.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1, childAspectRatio: 8.0 / 8.0),
+              crossAxisCount: 1,
+              childAspectRatio: 1.0,
+              mainAxisSpacing: 8.0,
+            ),
             itemBuilder: (context, index) {
-              return Container(
-                padding: EdgeInsets.all(10.0),
-                child: InkWell(
-                  onTap: () => Navigator.push(
-                    context,
-                    new MaterialPageRoute(
-                        builder: (context) => new PlayStatus(videoList[index])),
-                  ),
+              return InkWell(
+                onTap: () => Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                      builder: (context) => new PlayStatus(videoList[index])),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
                   child: Container(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -97,7 +97,6 @@ class _VideoGridState extends State<VideoGrid> {
                           Color(0xffb7d8cf),
                         ],
                       ),
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
                     ),
                     child: FutureBuilder(
                         future: _getImage(videoList[index]),
@@ -105,15 +104,13 @@ class _VideoGridState extends State<VideoGrid> {
                           if (snapshot.connectionState ==
                               ConnectionState.done) {
                             if (snapshot.hasData) {
-                              return Column(children: <Widget>[
-                                Hero(
-                                  tag: videoList[index],
-                                  child: Image.file(
-                                    File(snapshot.data),
-                                    height: 280.0,
-                                  ),
+                              return Hero(
+                                tag: videoList[index],
+                                child: Image.file(
+                                  File(snapshot.data),
+                                  fit: BoxFit.cover,
                                 ),
-                              ]);
+                              );
                             } else {
                               return Center(
                                 child: CircularProgressIndicator(),
@@ -139,12 +136,9 @@ class _VideoGridState extends State<VideoGrid> {
         );
       } else {
         return Center(
-          child: Container(
-            padding: EdgeInsets.only(bottom: 60.0),
-            child: Text(
-              "Sorry, No Videos Found.",
-              style: TextStyle(fontSize: 18.0),
-            ),
+          child: Text(
+            "Sorry, No Videos Found.",
+            style: TextStyle(fontSize: 18.0),
           ),
         );
       }
@@ -155,5 +149,3 @@ class _VideoGridState extends State<VideoGrid> {
     }
   }
 }
-
-

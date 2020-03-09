@@ -10,14 +10,11 @@ class Dashboard extends StatefulWidget {
 class DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Container(
-      child: TabBarView(
-        children: [
-          ImageScreen(),
-          VideoScreen(),
-        ],
-      ),
+    return TabBarView(
+      children: [
+        ImageScreen(),
+        VideoScreen(),
+      ],
     );
   }
 }
