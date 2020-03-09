@@ -115,35 +115,33 @@ class MyAppState extends State<MyApp> {
                           Colors.lightBlue[100],
                         ],
                       )),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Text(
-                                "Storage Permission Required",
-                                style: TextStyle(fontSize: 20.0),
-                              ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Text(
+                              "Storage Permission Required",
+                              style: TextStyle(fontSize: 20.0),
                             ),
-                            FlatButton(
-                              padding: EdgeInsets.all(15.0),
-                              child: Text(
-                                "Allow Storage Permission",
-                                style: TextStyle(fontSize: 20.0),
-                              ),
-                              color: Colors.indigo,
-                              textColor: Colors.white,
-                              onPressed: () {
-                                setState(() {
-                                  _storagePermissionChecker =
-                                      requestStoragePermission();
-                                });
-                              },
-                            )
-                          ],
-                        ),
+                          ),
+                          FlatButton(
+                            padding: EdgeInsets.all(15.0),
+                            child: Text(
+                              "Allow Storage Permission",
+                              style: TextStyle(fontSize: 20.0),
+                            ),
+                            color: Colors.indigo,
+                            textColor: Colors.white,
+                            onPressed: () {
+                              setState(() {
+                                _storagePermissionChecker =
+                                    requestStoragePermission();
+                              });
+                            },
+                          )
+                        ],
                       ),
                     ),
                   );
@@ -164,18 +162,9 @@ class MyAppState extends State<MyApp> {
                       ],
                     )),
                     child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Text(
-                              "Something went wrong.. Please uninstall and Install Again.",
-                              style: TextStyle(fontSize: 20.0),
-                            ),
-                          ),
-                        ],
+                      child: Text(
+                        "Something went wrong.. Please uninstall and Install Again.",
+                        style: TextStyle(fontSize: 20.0),
                       ),
                     ),
                   ),
@@ -197,12 +186,7 @@ class MyAppState extends State<MyApp> {
   }
 }
 
-class MyHome extends StatefulWidget {
-  @override
-  _MyHomeState createState() => _MyHomeState();
-}
-
-class _MyHomeState extends State<MyHome> {
+class MyHome extends StatelessWidget {
   var html =
       "<h3><b>How To Use?</b></h3><p>- Check the Desired Status/Story...</p><p>- Come Back to App, Click on any Image or Video to View...</p><p>- Click the Save Button...<br />The Image/Video is Instantly saved to your Galery :)</p><p>- You can also Use Multiple Saving. [to do]</p>";
 

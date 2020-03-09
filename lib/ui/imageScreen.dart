@@ -20,13 +20,10 @@ class ImageScreenState extends State<ImageScreen> {
   @override
   Widget build(BuildContext context) {
     if (!Directory("${_photoDir.path}").existsSync()) {
-      return Container(
-        padding: EdgeInsets.only(bottom: 60.0),
-        child: Center(
-          child: Text(
-            "Install WhatsApp\nYour Friend's Status Will Be Available Here",
-            style: TextStyle(fontSize: 18.0),
-          ),
+      return Center(
+        child: Text(
+          "Install WhatsApp\nYour Friend's Status Will Be Available Here",
+          style: TextStyle(fontSize: 18.0),
         ),
       );
     } else {
@@ -37,9 +34,8 @@ class ImageScreenState extends State<ImageScreen> {
           .toList(growable: false);
       if (imageList.length > 0) {
         return Container(
-          padding: EdgeInsets.only(bottom: 60.0),
+          margin: EdgeInsets.all(8.0),
           child: StaggeredGridView.countBuilder(
-            padding: EdgeInsets.all(8.0),
             itemCount: imageList.length,
             crossAxisCount: 4,
             itemBuilder: (context, index) {
@@ -74,7 +70,10 @@ class ImageScreenState extends State<ImageScreen> {
           body: Center(
             child: new Container(
                 padding: EdgeInsets.only(bottom: 60.0),
-                child: Text('Sorry, No Image Found!', style: TextStyle(fontSize: 18.0),)),
+                child: Text(
+                  'Sorry, No Image Found!',
+                  style: TextStyle(fontSize: 18.0),
+                )),
           ),
         );
       }
