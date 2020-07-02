@@ -25,15 +25,14 @@ class MyAppState extends State<MyApp> {
 
   Future<int> checkStoragePermission() async {
     // bool result = await SimplePermissions.checkPermission(Permission.ReadExternalStorage);
-    PermissionStatus result = await PermissionHandler()
-        .checkPermissionStatus(PermissionGroup.storage);
+    var result = await Permission.storage.status;
     print("Checking Storage Permission " + result.toString());
     setState(() {
       _storagePermissionCheck = 1;
     });
-    if (result.toString() == 'PermissionStatus.denied') {
+    if (result.isDenied) {
       return 0;
-    } else if (result.toString() == 'PermissionStatus.granted') {
+    } else if (result.isGranted) {
       return 1;
     } else {
       return 0;
@@ -42,11 +41,11 @@ class MyAppState extends State<MyApp> {
 
   Future<int> requestStoragePermission() async {
     // PermissionStatus result = await SimplePermissions.requestPermission(Permission.ReadExternalStorage);
-    Map<PermissionGroup, PermissionStatus> result =
-        await PermissionHandler().requestPermissions([PermissionGroup.storage]);
-    if (result.toString() == 'PermissionStatus.denied') {
+    Map<Permission, PermissionStatus> result =
+        await [Permission.storage].request();
+    if (result[Permission.storage].isDenied) {
       return 1;
-    } else if (result.toString() == 'PermissionStatus.granted') {
+    } else if (result[Permission.storage].isGranted) {
       return 2;
     } else {
       return 1;
@@ -187,7 +186,7 @@ class MyAppState extends State<MyApp> {
 }
 
 class MyHome extends StatelessWidget {
-  var html =
+  final html =
       "<h3><b>How To Use?</b></h3><p>- Check the Desired Status/Story...</p><p>- Come Back to App, Click on any Image or Video to View...</p><p>- Click the Save Button...<br />The Image/Video is Instantly saved to your Galery :)</p><p>- You can also Use Multiple Saving. [to do]</p>";
 
   @override
