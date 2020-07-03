@@ -20,11 +20,18 @@ class ImageScreenState extends State<ImageScreen> {
   @override
   Widget build(BuildContext context) {
     if (!Directory("${_photoDir.path}").existsSync()) {
-      return Center(
-        child: Text(
-          "Install WhatsApp\nYour Friend's Status Will Be Available Here",
-          style: TextStyle(fontSize: 18.0),
-        ),
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Install WhatsApp\n",
+            style: TextStyle(fontSize: 18.0),
+          ),
+          Text(
+            "Your Friend's Status Will Be Available Here",
+            style: TextStyle(fontSize: 18.0),
+          ),
+        ],
       );
     } else {
       var imageList = _photoDir

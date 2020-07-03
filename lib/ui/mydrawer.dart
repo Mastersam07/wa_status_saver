@@ -13,6 +13,7 @@ class MyNavigationDrawer extends StatelessWidget {
       throw 'Could not launch $url';
     }
   }
+
   _launchAboutURL() async {
     const url = 'https://github.com/Mastersam07';
     if (await canLaunch(url)) {

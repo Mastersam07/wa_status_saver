@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:flutter_fab_dialer/flutter_fab_dialer.dart';
 
-
 class ViewPhotos extends StatefulWidget {
   final String imgPath;
   ViewPhotos(this.imgPath);
