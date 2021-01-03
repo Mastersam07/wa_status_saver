@@ -45,12 +45,16 @@ class MyAppState extends State<MyApp> {
     // PermissionStatus result = await SimplePermissions.requestPermission(Permission.ReadExternalStorage);
     Map<Permission, PermissionStatus> result =
         await [Permission.storage].request();
+    print(result);
+    setState(() {
+
+    });
     if (result[Permission.storage].isDenied) {
-      return 1;
+      return 0;
     } else if (result[Permission.storage].isGranted) {
-      return 2;
-    } else {
       return 1;
+    } else {
+      return 0;
     }
   }
 
@@ -114,6 +118,7 @@ class MyAppState extends State<MyApp> {
                         } else {
                           return Scaffold(
                             body: Container(
+                              width: MediaQuery.of(context).size.width,
                               decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                 begin: Alignment.bottomLeft,
@@ -146,9 +151,10 @@ class MyAppState extends State<MyApp> {
                                     color: Colors.indigo,
                                     textColor: Colors.white,
                                     onPressed: () {
+                                      _storagePermissionChecker =
+                                          requestStoragePermission();
                                       setState(() {
-                                        _storagePermissionChecker =
-                                            requestStoragePermission();
+
                                       });
                                     },
                                   )
