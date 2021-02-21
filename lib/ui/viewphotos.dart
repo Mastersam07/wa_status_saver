@@ -1,12 +1,16 @@
 import 'dart:io';
 import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:flutter_fab_dialer/flutter_fab_dialer.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 class ViewPhotos extends StatefulWidget {
   final String imgPath;
-  ViewPhotos(this.imgPath);
+  const ViewPhotos({
+    Key key,
+    this.imgPath,
+  }) : super(key: key);
 
   @override
   _ViewPhotosState createState() => _ViewPhotosState();
@@ -14,9 +18,9 @@ class ViewPhotos extends StatefulWidget {
 
 class _ViewPhotosState extends State<ViewPhotos> {
   var filePath;
-  final String imgShare = "Image.file(File(widget.imgPath),)";
+  final String imgShare = 'Image.file(File(widget.imgPath),)';
 
-  final LinearGradient backgroundGradient = new LinearGradient(
+  final LinearGradient backgroundGradient = const LinearGradient(
     colors: [
       Color(0x00000000),
       Color(0x00333333),
@@ -35,8 +39,8 @@ class _ViewPhotosState extends State<ViewPhotos> {
               children: <Widget>[
                 Center(
                   child: Container(
-                      padding: EdgeInsets.all(10.0),
-                      child: CircularProgressIndicator()),
+                      padding: const EdgeInsets.all(10.0),
+                      child: const CircularProgressIndicator()),
                 ),
               ],
             );
@@ -53,32 +57,32 @@ class _ViewPhotosState extends State<ViewPhotos> {
                 children: <Widget>[
                   Center(
                     child: Container(
-                      padding: EdgeInsets.all(15.0),
+                      padding: const EdgeInsets.all(15.0),
                       child: Column(
                         children: <Widget>[
-                          Text(
-                            "Great, Saved in Gallary",
+                          const Text(
+                            'Great, Saved in Gallary',
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
-                          Padding(
+                          const Padding(
                             padding: EdgeInsets.all(10.0),
                           ),
                           Text(str,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16.0,
                               )),
-                          Padding(
+                          const Padding(
                             padding: EdgeInsets.all(10.0),
                           ),
-                          Text("FileManager > wa_status_saver",
+                          const Text('FileManager > wa_status_saver',
                               style: TextStyle(
                                   fontSize: 16.0, color: Colors.teal)),
-                          Padding(
+                          const Padding(
                             padding: EdgeInsets.all(10.0),
                           ),
                           MaterialButton(
-                            child: Text("Close"),
+                            child: const Text('Close'),
                             color: Colors.teal,
                             textColor: Colors.white,
                             onPressed: () => Navigator.pop(context),
@@ -97,14 +101,14 @@ class _ViewPhotosState extends State<ViewPhotos> {
   @override
   Widget build(BuildContext context) {
     //The list of FabMiniMenuItems that we are going to use
-    var _fabMiniMenuItemList = [
-      new FabMiniMenuItem.withText(
-          new Icon(Icons.sd_storage), Colors.teal, 4.0, "Button menu",
+    final _fabMiniMenuItemList = [
+      FabMiniMenuItem.withText(
+          const Icon(Icons.sd_storage), Colors.teal, 4.0, 'Button menu',
           () async {
-        _onLoading(true, "");
+        _onLoading(true, '');
 
-        Uri myUri = Uri.parse(widget.imgPath);
-        File originalImageFile = new File.fromUri(myUri);
+        final myUri = Uri.parse(widget.imgPath);
+        final originalImageFile = File.fromUri(myUri);
         Uint8List bytes;
         await originalImageFile.readAsBytes().then((value) {
           bytes = Uint8List.fromList(value);
@@ -117,21 +121,21 @@ class _ViewPhotosState extends State<ViewPhotos> {
             await ImageGallerySaver.saveImage(Uint8List.fromList(bytes));
         print(result);
         _onLoading(false,
-            "If Image not available in gallary\n\nYou can find all images at");
-      }, "Save", Colors.black, Colors.white, true),
-      new FabMiniMenuItem.withText(new Icon(Icons.share), Colors.teal, 4.0,
-          "Button menu", () {}, "Share", Colors.black, Colors.white, true),
-      new FabMiniMenuItem.withText(new Icon(Icons.reply), Colors.teal, 4.0,
-          "Button menu", () {}, "Repost", Colors.black, Colors.white, true),
-      new FabMiniMenuItem.withText(new Icon(Icons.wallpaper), Colors.teal, 4.0,
-          "Button menu", () {}, "Set As", Colors.black, Colors.white, true),
-      new FabMiniMenuItem.withText(
-          new Icon(Icons.delete_outline),
+            'If Image not available in gallary\n\nYou can find all images at');
+      }, 'Save', Colors.black, Colors.white, true),
+      FabMiniMenuItem.withText(const Icon(Icons.share), Colors.teal, 4.0,
+          'Button menu', () {}, 'Share', Colors.black, Colors.white, true),
+      FabMiniMenuItem.withText(const Icon(Icons.reply), Colors.teal, 4.0,
+          'Button menu', () {}, 'Repost', Colors.black, Colors.white, true),
+      FabMiniMenuItem.withText(const Icon(Icons.wallpaper), Colors.teal, 4.0,
+          'Button menu', () {}, 'Set As', Colors.black, Colors.white, true),
+      FabMiniMenuItem.withText(
+          const Icon(Icons.delete_outline),
           Colors.teal,
           4.0,
-          "Button menu",
+          'Button menu',
           () {},
-          "Delete",
+          'Delete',
           Colors.black,
           Colors.white,
           true),
@@ -144,7 +148,7 @@ class _ViewPhotosState extends State<ViewPhotos> {
         backgroundColor: Colors.transparent,
         leading: IconButton(
           color: Colors.indigo,
-          icon: Icon(
+          icon: const Icon(
             Icons.close,
             color: Colors.white,
           ),
@@ -164,8 +168,7 @@ class _ViewPhotosState extends State<ViewPhotos> {
                 ),
               ),
             ),
-            new FabDialer(
-                _fabMiniMenuItemList, Colors.teal, new Icon(Icons.add)),
+            FabDialer(_fabMiniMenuItemList, Colors.teal, const Icon(Icons.add)),
           ],
         ),
       ),

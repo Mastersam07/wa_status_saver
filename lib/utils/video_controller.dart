@@ -8,7 +8,7 @@ class StatusVideo extends StatefulWidget {
   final String videoSrc;
   final double aspectRatio;
 
-  StatusVideo({
+  const StatusVideo({
     @required this.videoPlayerController,
     this.looping,
     this.videoSrc,
@@ -17,7 +17,7 @@ class StatusVideo extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _StatusVideoState createState() => new _StatusVideoState();
+  _StatusVideoState createState() => _StatusVideoState();
 }
 
 class _StatusVideoState extends State<StatusVideo> {
@@ -30,7 +30,7 @@ class _StatusVideoState extends State<StatusVideo> {
         autoInitialize: true,
         looping: widget.looping,
         allowFullScreen: true,
-        aspectRatio: 3 / 2,
+        aspectRatio: widget.videoPlayerController.value.aspectRatio,
         // autoPlay: true,
         errorBuilder: (context, errorMessage) {
           return Center(
@@ -41,23 +41,19 @@ class _StatusVideoState extends State<StatusVideo> {
 
   @override
   Widget build(BuildContext context) {
+    print(' aspect ratio: ${widget.videoPlayerController.value}');
     return Container(
-      padding: EdgeInsets.only(top: 0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(top: 0),
+            padding: const EdgeInsets.only(top: 0),
             child: Hero(
               tag: widget.videoSrc,
               child: Chewie(
                 controller: _chewieController,
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          );
+    //     ],
+    //   ),
+    // );
   }
 
   @override

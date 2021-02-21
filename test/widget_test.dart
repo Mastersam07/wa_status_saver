@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 void main() {
   testWidgets('app should work', (tester) async {
     // Build an App with a Text Widget that displays the letter 'H'
-    await tester.pumpWidget(MaterialApp(
+    await tester.pumpWidget(const MaterialApp(
       home: Scaffold(
         body: Text('H'),
       ),

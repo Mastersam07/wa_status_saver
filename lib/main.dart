@@ -2,23 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:wa_status_saver/ui/homepage.dart';
+import 'ui/homepage.dart';
 // import 'package:flutter_html/flutter_html.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown
-  ]);
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(
-    MyApp(),
+    const MyApp(),
   );
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key key}) : super(key: key);
   @override
-  MyAppState createState() => new MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
 class MyAppState extends State<MyApp> {
@@ -26,9 +25,10 @@ class MyAppState extends State<MyApp> {
   Future<int> _storagePermissionChecker;
 
   Future<int> checkStoragePermission() async {
-    // bool result = await SimplePermissions.checkPermission(Permission.ReadExternalStorage);
-    var result = await Permission.storage.status;
-    print("Checking Storage Permission " + result.toString());
+    /// bool result = await
+    /// SimplePermissions.checkPermission(Permission.ReadExternalStorage);
+    final result = await Permission.storage.status;
+    print('Checking Storage Permission ' + result.toString());
     setState(() {
       _storagePermissionCheck = 1;
     });
@@ -42,13 +42,11 @@ class MyAppState extends State<MyApp> {
   }
 
   Future<int> requestStoragePermission() async {
-    // PermissionStatus result = await SimplePermissions.requestPermission(Permission.ReadExternalStorage);
-    Map<Permission, PermissionStatus> result =
-        await [Permission.storage].request();
+    /// PermissionStatus result = await
+    /// SimplePermissions.requestPermission(Permission.ReadExternalStorage);
+    final result = await [Permission.storage].request();
     print(result);
-    setState(() {
-
-    });
+    setState(() {});
     if (result[Permission.storage].isDenied) {
       return 0;
     } else if (result[Permission.storage].isGranted) {
@@ -65,7 +63,7 @@ class MyAppState extends State<MyApp> {
       int storagePermissionCheckInt;
       int finalPermission;
 
-      print("Initial Values of $_storagePermissionCheck");
+      print('Initial Values of $_storagePermissionCheck');
       if (_storagePermissionCheck == null || _storagePermissionCheck == 0) {
         _storagePermissionCheck = await checkStoragePermission();
       } else {
@@ -114,7 +112,7 @@ class MyAppState extends State<MyApp> {
                     if (status.connectionState == ConnectionState.done) {
                       if (status.hasData) {
                         if (status.data == 1) {
-                          return MyHome();
+                          return const MyHome();
                         } else {
                           return Scaffold(
                             body: Container(
@@ -135,17 +133,17 @@ class MyAppState extends State<MyApp> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(20.0),
+                                  const Padding(
+                                    padding: EdgeInsets.all(20.0),
                                     child: Text(
-                                      "Storage Permission Required",
+                                      'Storage Permission Required',
                                       style: TextStyle(fontSize: 20.0),
                                     ),
                                   ),
                                   FlatButton(
-                                    padding: EdgeInsets.all(15.0),
-                                    child: Text(
-                                      "Allow Storage Permission",
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: const Text(
+                                      'Allow Storage Permission',
                                       style: TextStyle(fontSize: 20.0),
                                     ),
                                     color: Colors.indigo,
@@ -153,9 +151,7 @@ class MyAppState extends State<MyApp> {
                                     onPressed: () {
                                       _storagePermissionChecker =
                                           requestStoragePermission();
-                                      setState(() {
-
-                                      });
+                                      setState(() {});
                                     },
                                   )
                                 ],
@@ -178,9 +174,10 @@ class MyAppState extends State<MyApp> {
                                 Colors.lightBlue[100],
                               ],
                             )),
-                            child: Center(
+                            child: const Center(
                               child: Text(
-                                "Something went wrong.. Please uninstall and Install Again.",
+                                '''
+Something went wrong.. Please uninstall and Install Again.''',
                                 style: TextStyle(fontSize: 20.0),
                               ),
                             ),
@@ -188,8 +185,8 @@ class MyAppState extends State<MyApp> {
                         );
                       }
                     } else {
-                      return Scaffold(
-                        body: Container(
+                      return const Scaffold(
+                        body: SizedBox(
                           child: Center(
                             child: CircularProgressIndicator(),
                           ),

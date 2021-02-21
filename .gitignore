@@ -18,7 +18,9 @@
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
 # is commented out by default.
-#.vscode/
+.vscode/
+.fvm/
+analysis_options.yaml
 
 # Flutter/Dart/Pub related
 **/doc/api/

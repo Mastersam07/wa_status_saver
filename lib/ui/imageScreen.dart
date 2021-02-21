@@ -1,14 +1,17 @@
-import 'package:flutter/material.dart';
 import 'dart:io';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:wa_status_saver/ui/viewphotos.dart';
+
+import 'viewphotos.dart';
 
 final Directory _photoDir =
-    new Directory('/storage/emulated/0/WhatsApp/Media/.Statuses');
+    Directory('/storage/emulated/0/WhatsApp/Media/.Statuses');
 
 class ImageScreen extends StatefulWidget {
+  const ImageScreen({Key key}) : super(key: key);
   @override
-  ImageScreenState createState() => new ImageScreenState();
+  ImageScreenState createState() => ImageScreenState();
 }
 
 class ImageScreenState extends State<ImageScreen> {
@@ -19,43 +22,48 @@ class ImageScreenState extends State<ImageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (!Directory("${_photoDir.path}").existsSync()) {
+    if (!Directory('${_photoDir.path}').existsSync()) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            "Install WhatsApp\n",
+          const Text(
+            'Install WhatsApp\n',
             style: TextStyle(fontSize: 18.0),
           ),
-          Text(
+          const Text(
             "Your Friend's Status Will Be Available Here",
             style: TextStyle(fontSize: 18.0),
           ),
         ],
       );
     } else {
-      var imageList = _photoDir
+      final imageList = _photoDir
           .listSync()
           .map((item) => item.path)
-          .where((item) => item.endsWith(".jpg"))
+          .where((item) => item.endsWith('.jpg'))
           .toList(growable: false);
+      print(imageList);
       if (imageList.length > 0) {
         return Container(
-          margin: EdgeInsets.all(8.0),
+          margin: const EdgeInsets.all(8.0),
           child: StaggeredGridView.countBuilder(
             itemCount: imageList.length,
             crossAxisCount: 4,
             itemBuilder: (context, index) {
-              String imgPath = imageList[index];
+              final imgPath = imageList[index];
               return Material(
                 elevation: 8.0,
-                borderRadius: BorderRadius.all(Radius.circular(8)),
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
                 child: InkWell(
                   onTap: () {
                     Navigator.push(
-                        context,
-                        new MaterialPageRoute(
-                            builder: (context) => new ViewPhotos(imgPath)));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ViewPhotos(
+                          imgPath: imgPath,
+                        ),
+                      ),
+                    );
                   },
                   child: Hero(
                       tag: imgPath,
@@ -75,9 +83,9 @@ class ImageScreenState extends State<ImageScreen> {
       } else {
         return Scaffold(
           body: Center(
-            child: new Container(
-                padding: EdgeInsets.only(bottom: 60.0),
-                child: Text(
+            child: Container(
+                padding: const EdgeInsets.only(bottom: 60.0),
+                child: const Text(
                   'Sorry, No Image Found!',
                   style: TextStyle(fontSize: 18.0),
                 )),

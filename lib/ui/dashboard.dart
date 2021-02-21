@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:wa_status_saver/ui/imageScreen.dart';
-import 'package:wa_status_saver/ui/videoScreen.dart';
+import 'imageScreen.dart';
+import 'videoScreen.dart';
 
 class Dashboard extends StatefulWidget {
+  const Dashboard({Key key}) : super(key: key);
   @override
-  DashboardState createState() => new DashboardState();
+  DashboardState createState() => DashboardState();
 }
 
 class DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    return TabBarView(
+    return const TabBarView(
       children: [
         ImageScreen(),
         VideoScreen(),
