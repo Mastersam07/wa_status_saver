@@ -1,5 +1,6 @@
 name: wa_status_saver
 description: A new Flutter application.
+publish_to: none
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -14,32 +15,34 @@ description: A new Flutter application.
 version: 0.3+2
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: '>=2.16.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  adaptive_theme: ^0.1.1
+  adaptive_theme: ^2.3.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
-  share: ^0.6.4+3
-  url_launcher: ^5.4.11
-  permission_handler: ^5.0.1+1
-  flutter_staggered_grid_view: ^0.3.0
-  path_provider: ^1.6.11
-  image_gallery_saver: ^1.5.0
-  flutter_html: ^1.0.0
-  flutter_fab_dialer: ^0.1.1
-  thumbnails: ^1.0.1
-  chewie: ^0.9.10
-  video_player: ^0.10.11+2
+  cupertino_icons: ^1.0.5
+  share: ^2.0.4
+  url_launcher: ^6.1.5
+  permission_handler: ^10.0.0
+  flutter_staggered_grid_view: ^0.6.2
+  path_provider: ^2.0.11
+  image_gallery_saver: ^1.7.1
+  flutter_html: ^2.2.1
+  # flutter_fab_dialer: ^0.1.1
+  speed_dial_fab: ^2.2.1
+  video_thumbnail:
+    git: https://github.com/ajbcoder/video_thumbnail
+  chewie: ^1.3.4
+  video_player: ^2.4.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.7.5
+  flutter_launcher_icons: ^0.10.0
 
 flutter_icons:
   android: "launcher_icon"

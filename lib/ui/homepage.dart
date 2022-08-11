@@ -3,7 +3,7 @@ import 'dashboard.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 
 class MyHome extends StatelessWidget {
-  const MyHome({Key key}) : super(key: key);
+  const MyHome({Key? key}) : super(key: key);
   final html =
       '<h3><b>How To Use?</b></h3><p>- Check the Desired Status/Story...</p><p>- Come Back to App, Click on any Image or Video to View...</p><p>- Click the Save Button...<br />The Image/Video is Instantly saved to your Galery :)</p><p>- You can also Use Multiple Saving. [to do]</p>';
 

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:thumbnails/thumbnails.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 
 import '../utils/video_play.dart';
 
@@ -9,7 +9,7 @@ final Directory _videoDir =
     Directory('/storage/emulated/0/WhatsApp/Media/.Statuses');
 
 class VideoScreen extends StatefulWidget {
-  const VideoScreen({Key key}) : super(key: key);
+  const VideoScreen({Key? key}) : super(key: key);
   @override
   VideoScreenState createState() => VideoScreenState();
 }
@@ -43,34 +43,30 @@ class VideoScreenState extends State<VideoScreen> {
 }
 
 class VideoGrid extends StatefulWidget {
-  final Directory directory;
+  final Directory? directory;
 
-  const VideoGrid({Key key, this.directory}) : super(key: key);
+  const VideoGrid({Key? key, this.directory}) : super(key: key);
 
   @override
   _VideoGridState createState() => _VideoGridState();
 }
 
 class _VideoGridState extends State<VideoGrid> {
-  Future<String> _getImage(videoPathUrl) async {
+  Future<String?> _getImage(videoPathUrl) async {
     //await Future.delayed(Duration(milliseconds: 500));
-    final thumb = await Thumbnails.getThumbnail(
-        videoFile: videoPathUrl,
-        imageType:
-            ThumbFormat.PNG, //this image will store in created folderpath
-        quality: 10);
+    final thumb = await VideoThumbnail.thumbnailFile(video: videoPathUrl);
     return thumb;
   }
 
   @override
   Widget build(BuildContext context) {
-    final videoList = widget.directory
+    final videoList = widget.directory!
         .listSync()
         .map((item) => item.path)
         .where((item) => item.endsWith('.mp4'))
         .toList(growable: false);
 
-    if (videoList != null) {
+    if (videoList.isNotEmpty) {
       if (videoList.length > 0) {
         return Container(
           margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
@@ -109,7 +105,7 @@ class _VideoGridState extends State<VideoGrid> {
                         ],
                       ),
                     ),
-                    child: FutureBuilder(
+                    child: FutureBuilder<String?>(
                         future: _getImage(videoList[index]),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
@@ -118,7 +114,7 @@ class _VideoGridState extends State<VideoGrid> {
                               return Hero(
                                 tag: videoList[index],
                                 child: Image.file(
-                                  File(snapshot.data),
+                                  File(snapshot.data!),
                                   fit: BoxFit.cover,
                                 ),
                               );

@@ -2,14 +2,14 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_fab_dialer/flutter_fab_dialer.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:speed_dial_fab/speed_dial_fab.dart';
 
 class ViewPhotos extends StatefulWidget {
   final String imgPath;
   const ViewPhotos({
-    Key key,
-    this.imgPath,
+    Key? key,
+    required this.imgPath,
   }) : super(key: key);
 
   @override
@@ -28,6 +28,14 @@ class _ViewPhotosState extends State<ViewPhotos> {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+
+  final _fabMiniMenuItemList = [
+    Icons.sd_card,
+    Icons.share,
+    Icons.reply,
+    Icons.wallpaper,
+    Icons.delete_outline,
+  ];
 
   void _onLoading(bool t, String str) {
     if (t) {
@@ -101,45 +109,6 @@ class _ViewPhotosState extends State<ViewPhotos> {
   @override
   Widget build(BuildContext context) {
     //The list of FabMiniMenuItems that we are going to use
-    final _fabMiniMenuItemList = [
-      FabMiniMenuItem.withText(
-          const Icon(Icons.sd_storage), Colors.teal, 4.0, 'Button menu',
-          () async {
-        _onLoading(true, '');
-
-        final myUri = Uri.parse(widget.imgPath);
-        final originalImageFile = File.fromUri(myUri);
-        Uint8List bytes;
-        await originalImageFile.readAsBytes().then((value) {
-          bytes = Uint8List.fromList(value);
-          print('reading of bytes is completed');
-        }).catchError((onError) {
-          print('Exception Error while reading audio from path:' +
-              onError.toString());
-        });
-        final result =
-            await ImageGallerySaver.saveImage(Uint8List.fromList(bytes));
-        print(result);
-        _onLoading(false,
-            'If Image not available in gallary\n\nYou can find all images at');
-      }, 'Save', Colors.black, Colors.white, true),
-      FabMiniMenuItem.withText(const Icon(Icons.share), Colors.teal, 4.0,
-          'Button menu', () {}, 'Share', Colors.black, Colors.white, true),
-      FabMiniMenuItem.withText(const Icon(Icons.reply), Colors.teal, 4.0,
-          'Button menu', () {}, 'Repost', Colors.black, Colors.white, true),
-      FabMiniMenuItem.withText(const Icon(Icons.wallpaper), Colors.teal, 4.0,
-          'Button menu', () {}, 'Set As', Colors.black, Colors.white, true),
-      FabMiniMenuItem.withText(
-          const Icon(Icons.delete_outline),
-          Colors.teal,
-          4.0,
-          'Button menu',
-          () {},
-          'Delete',
-          Colors.black,
-          Colors.white,
-          true),
-    ];
 
     return Scaffold(
       backgroundColor: Colors.black12,
@@ -168,7 +137,45 @@ class _ViewPhotosState extends State<ViewPhotos> {
                 ),
               ),
             ),
-            FabDialer(_fabMiniMenuItemList, Colors.teal, const Icon(Icons.add)),
+            SpeedDialFabWidget(
+              secondaryIconsList: _fabMiniMenuItemList,
+              secondaryIconsText: [
+                "Save",
+                "Share",
+                "Repost",
+                "Set As",
+                "Delete",
+              ],
+              secondaryIconsOnPress: [
+                () async {
+                  _onLoading(true, '');
+
+                  final myUri = Uri.parse(widget.imgPath);
+                  final originalImageFile = File.fromUri(myUri);
+                  late Uint8List bytes;
+                  await originalImageFile.readAsBytes().then((value) {
+                    bytes = Uint8List.fromList(value);
+                    print('reading of bytes is completed');
+                  }).catchError((onError) {
+                    print('Exception Error while reading audio from path:' +
+                        onError.toString());
+                  });
+                  final result = await ImageGallerySaver.saveImage(
+                      Uint8List.fromList(bytes));
+                  print(result);
+                  _onLoading(false,
+                      'If Image not available in gallary\n\nYou can find all images at');
+                },
+                () => {},
+                () => {},
+              ],
+              primaryIconExpand: Icons.add,
+              primaryIconCollapse: Icons.add,
+              secondaryBackgroundColor: Colors.teal,
+              secondaryForegroundColor: Colors.teal,
+              primaryBackgroundColor: Colors.teal,
+              primaryForegroundColor: Colors.teal,
+            ),
           ],
         ),
       ),
