@@ -6,14 +6,14 @@ class StatusVideo extends StatefulWidget {
   final VideoPlayerController videoPlayerController;
   final bool looping;
   final String videoSrc;
-  final double aspectRatio;
+  final double? aspectRatio;
 
   const StatusVideo({
-    @required this.videoPlayerController,
-    this.looping,
-    this.videoSrc,
+    required this.videoPlayerController,
+    this.looping = false,
+    required this.videoSrc,
     this.aspectRatio,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -21,39 +21,37 @@ class StatusVideo extends StatefulWidget {
 }
 
 class _StatusVideoState extends State<StatusVideo> {
-  ChewieController _chewieController;
+  late ChewieController _chewieController;
   @override
   void initState() {
     super.initState();
     _chewieController = ChewieController(
-        videoPlayerController: widget.videoPlayerController,
-        autoInitialize: true,
-        looping: widget.looping,
-        allowFullScreen: true,
-        aspectRatio: widget.videoPlayerController.value.aspectRatio,
-        // autoPlay: true,
-        errorBuilder: (context, errorMessage) {
-          return Center(
-            child: Text(errorMessage),
-          );
-        });
+      videoPlayerController: widget.videoPlayerController,
+      autoInitialize: true,
+      looping: widget.looping,
+      allowFullScreen: true,
+      aspectRatio:
+          widget.aspectRatio ?? widget.videoPlayerController.value.aspectRatio,
+      errorBuilder: (context, errorMessage) {
+        return Center(
+          child: Text(errorMessage),
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     print(' aspect ratio: ${widget.videoPlayerController.value}');
     return Container(
-            padding: const EdgeInsets.only(top: 0),
-            child: Hero(
-              tag: widget.videoSrc,
-              child: Chewie(
-                controller: _chewieController,
-              ),
-            ),
-          );
-    //     ],
-    //   ),
-    // );
+      padding: const EdgeInsets.only(top: 0),
+      child: Hero(
+        tag: widget.videoSrc,
+        child: Chewie(
+          controller: _chewieController,
+        ),
+      ),
+    );
   }
 
   @override

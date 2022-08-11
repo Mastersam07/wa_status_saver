@@ -9,7 +9,7 @@ final Directory _photoDir =
     Directory('/storage/emulated/0/WhatsApp/Media/.Statuses');
 
 class ImageScreen extends StatefulWidget {
-  const ImageScreen({Key key}) : super(key: key);
+  const ImageScreen({Key? key}) : super(key: key);
   @override
   ImageScreenState createState() => ImageScreenState();
 }
@@ -46,36 +46,37 @@ class ImageScreenState extends State<ImageScreen> {
       if (imageList.length > 0) {
         return Container(
           margin: const EdgeInsets.all(8.0),
-          child: StaggeredGridView.countBuilder(
-            itemCount: imageList.length,
+          child: StaggeredGrid.count(
             crossAxisCount: 4,
-            itemBuilder: (context, index) {
-              final imgPath = imageList[index];
-              return Material(
-                elevation: 8.0,
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ViewPhotos(
-                          imgPath: imgPath,
-                        ),
+            children: [
+              ...imageList.map((imgPath) => StaggeredGridTile.count(
+                    crossAxisCellCount: 2,
+                    mainAxisCellCount:
+                        imageList.indexOf(imgPath).isEven ? 2 : 3,
+                    child: Material(
+                      elevation: 8.0,
+                      borderRadius: const BorderRadius.all(Radius.circular(8)),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ViewPhotos(
+                                imgPath: imgPath,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Hero(
+                            tag: imgPath,
+                            child: Image.file(
+                              File(imgPath),
+                              fit: BoxFit.cover,
+                            )),
                       ),
-                    );
-                  },
-                  child: Hero(
-                      tag: imgPath,
-                      child: Image.file(
-                        File(imgPath),
-                        fit: BoxFit.cover,
-                      )),
-                ),
-              );
-            },
-            staggeredTileBuilder: (i) =>
-                StaggeredTile.count(2, i.isEven ? 2 : 3),
+                    ),
+                  ))
+            ],
             mainAxisSpacing: 8.0,
             crossAxisSpacing: 8.0,
           ),
