@@ -124,61 +124,48 @@ class _ViewPhotosState extends State<ViewPhotos> {
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      body: SizedBox.expand(
-        child: Stack(
-          children: <Widget>[
-            Align(
-              alignment: Alignment.center,
-              child: Hero(
-                tag: widget.imgPath,
-                child: Image.file(
-                  File(widget.imgPath),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            SpeedDialFabWidget(
-              secondaryIconsList: _fabMiniMenuItemList,
-              secondaryIconsText: [
-                "Save",
-                "Share",
-                "Repost",
-                "Set As",
-                "Delete",
-              ],
-              secondaryIconsOnPress: [
-                () async {
-                  _onLoading(true, '');
-
-                  final myUri = Uri.parse(widget.imgPath);
-                  final originalImageFile = File.fromUri(myUri);
-                  late Uint8List bytes;
-                  await originalImageFile.readAsBytes().then((value) {
-                    bytes = Uint8List.fromList(value);
-                    print('reading of bytes is completed');
-                  }).catchError((onError) {
-                    print('Exception Error while reading audio from path:' +
-                        onError.toString());
-                  });
-                  final result = await ImageGallerySaver.saveImage(
-                      Uint8List.fromList(bytes));
-                  print(result);
-                  _onLoading(false,
-                      'If Image not available in gallary\n\nYou can find all images at');
-                },
-                () => {},
-                () => {},
-              ],
-              primaryIconExpand: Icons.add,
-              primaryIconCollapse: Icons.add,
-              secondaryBackgroundColor: Colors.teal,
-              secondaryForegroundColor: Colors.teal,
-              primaryBackgroundColor: Colors.teal,
-              primaryForegroundColor: Colors.teal,
-            ),
-          ],
+      body: Center(
+        child: Image.file(
+          File(widget.imgPath),
+          fit: BoxFit.cover,
         ),
       ),
+      floatingActionButton: SpeedDialFabWidget(
+        secondaryIconsList: _fabMiniMenuItemList,
+        secondaryIconsText: [
+          "Save",
+          "Share",
+          "Repost",
+          "Set As",
+          "Delete",
+        ],
+        secondaryIconsOnPress: [
+          () async {
+            _onLoading(true, '');
+
+            final myUri = Uri.parse(widget.imgPath);
+            final originalImageFile = File.fromUri(myUri);
+            late Uint8List bytes;
+            await originalImageFile.readAsBytes().then((value) {
+              bytes = Uint8List.fromList(value);
+            }).catchError((onError) {});
+            await ImageGallerySaver.saveImage(Uint8List.fromList(bytes));
+            _onLoading(false,
+                'If Image not available in gallary\n\nYou can find all images at');
+          },
+          () => {},
+          () => {},
+          () => {},
+          () => {},
+        ],
+        primaryIconExpand: Icons.add,
+        primaryIconCollapse: Icons.add,
+        secondaryBackgroundColor: Colors.teal,
+        secondaryForegroundColor: Colors.white,
+        primaryBackgroundColor: Colors.teal,
+        primaryForegroundColor: Colors.white,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

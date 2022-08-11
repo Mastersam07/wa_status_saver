@@ -18,41 +18,38 @@ environment:
   sdk: '>=2.16.0 <3.0.0'
 
 dependencies:
+  adaptive_theme: ^2.3.1
+  chewie: ^1.3.4
+  cupertino_icons: ^1.0.5
+  device_info_plus:
+  filesystem_picker: ^2.0.0
   flutter:
     sdk: flutter
-  adaptive_theme: ^2.3.1
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.5
-  share: ^2.0.4
-  url_launcher: ^6.1.5
-  permission_handler: ^10.0.0
-  flutter_staggered_grid_view: ^0.6.2
-  path_provider: ^2.0.11
-  image_gallery_saver: ^1.7.1
   flutter_html: ^2.2.1
-  # flutter_fab_dialer: ^0.1.1
+  flutter_staggered_grid_view: ^0.6.2
+  image_gallery_saver: ^1.7.1
+  path_provider: ^2.0.11
+  permission_handler: ^10.0.0
+  provider: ^6.0.3
+  share: ^2.0.4
   speed_dial_fab: ^2.2.1
+  url_launcher: ^6.1.5
+  video_player: ^2.4.6
   video_thumbnail:
     git: https://github.com/ajbcoder/video_thumbnail
-  chewie: ^1.3.4
-  video_player: ^2.4.6
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.10.0
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.10.0
 
 flutter_icons:
   android: "launcher_icon"
   ios: true
   image_path: "assets/images/logo.png"
 
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter.
 flutter:
 
@@ -63,16 +60,13 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-   - assets/images/logo.png
-   - assets/images/video_loader.gif
+    - assets/images/logo.png
+    - assets/images/video_loader.gif
   #  - images/a_dot_ham.jpeg
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

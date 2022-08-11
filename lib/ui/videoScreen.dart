@@ -5,8 +5,8 @@ import 'package:video_thumbnail/video_thumbnail.dart';
 
 import '../utils/video_play.dart';
 
-final Directory _videoDir =
-    Directory('/storage/emulated/0/WhatsApp/Media/.Statuses');
+final Directory _videoDir = Directory(
+    '/storage/emulated/0/Android/media/com.whatsapp/WhatsApp/Media/.Statuses');
 
 class VideoScreen extends StatefulWidget {
   const VideoScreen({Key? key}) : super(key: key);
