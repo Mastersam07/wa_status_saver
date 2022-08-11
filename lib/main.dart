@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'ui/homepage.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 // import 'package:flutter_html/flutter_html.dart';
 
 void main() {
@@ -24,20 +25,58 @@ class MyAppState extends State<MyApp> {
   int? _storagePermissionCheck;
   Future<int>? _storagePermissionChecker;
 
-  Future<int> checkStoragePermission() async {
-    /// bool result = await
-    /// SimplePermissions.checkPermission(Permission.ReadExternalStorage);
-    final result = await Permission.storage.status;
-    print('Checking Storage Permission ' + result.toString());
+  int? androidSDK;
+
+  Future<int> _loadPermission() async {
+    //Get phone SDK version first inorder to request correct permissions.
+
+    final androidInfo = await DeviceInfoPlugin().androidInfo;
     setState(() {
-      _storagePermissionCheck = 1;
+      androidSDK = androidInfo.version.sdkInt;
     });
-    if (result.isDenied) {
-      return 0;
-    } else if (result.isGranted) {
-      return 1;
+    //
+    if (androidSDK! >= 30) {
+      //Check first if we already have the permissions
+      final _currentStatusManaged =
+          await Permission.manageExternalStorage.status;
+      if (_currentStatusManaged.isGranted) {
+        //Update
+        return 1;
+      } else {
+        return 0;
+      }
     } else {
-      return 0;
+      //For older phones simply request the typical storage permissions
+      //Check first if we already have the permissions
+      final _currentStatusStorage = await Permission.storage.status;
+      if (_currentStatusStorage.isGranted) {
+        //Update provider
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+  }
+
+  Future<int> requestPermission() async {
+    if (androidSDK! >= 30) {
+      //request management permissions for android 11 and higher devices
+      final _requestStatusManaged =
+          await Permission.manageExternalStorage.request();
+      //Update Provider model
+      if (_requestStatusManaged.isGranted) {
+        return 1;
+      } else {
+        return 0;
+      }
+    } else {
+      final _requestStatusStorage = await Permission.storage.request();
+      //Update provider model
+      if (_requestStatusStorage.isGranted) {
+        return 1;
+      } else {
+        return 0;
+      }
     }
   }
 
@@ -45,7 +84,6 @@ class MyAppState extends State<MyApp> {
     /// PermissionStatus result = await
     /// SimplePermissions.requestPermission(Permission.ReadExternalStorage);
     final result = await [Permission.storage].request();
-    print(result);
     setState(() {});
     if (result[Permission.storage]!.isDenied) {
       return 0;
@@ -63,9 +101,8 @@ class MyAppState extends State<MyApp> {
       int storagePermissionCheckInt;
       int finalPermission;
 
-      print('Initial Values of $_storagePermissionCheck');
       if (_storagePermissionCheck == null || _storagePermissionCheck == 0) {
-        _storagePermissionCheck = await checkStoragePermission();
+        _storagePermissionCheck = await _loadPermission();
       } else {
         _storagePermissionCheck = 1;
       }
@@ -149,8 +186,7 @@ class MyAppState extends State<MyApp> {
                               color: Colors.indigo,
                               textColor: Colors.white,
                               onPressed: () {
-                                _storagePermissionChecker =
-                                    requestStoragePermission();
+                                _storagePermissionChecker = requestPermission();
                                 setState(() {});
                               },
                             )

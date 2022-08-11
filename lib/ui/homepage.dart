@@ -52,12 +52,8 @@ class MyHome extends StatelessWidget {
 
   void choiceAction(String choice) {
     if (choice == Constants.about) {
-      print('About App');
     } else if (choice == Constants.rate) {
-      print('Rate App');
-    } else if (choice == Constants.share) {
-      print('Share with friends');
-    }
+    } else if (choice == Constants.share) {}
   }
 }
 

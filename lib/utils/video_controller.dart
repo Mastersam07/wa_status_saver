@@ -22,6 +22,7 @@ class StatusVideo extends StatefulWidget {
 
 class _StatusVideoState extends State<StatusVideo> {
   late ChewieController _chewieController;
+
   @override
   void initState() {
     super.initState();
@@ -42,7 +43,6 @@ class _StatusVideoState extends State<StatusVideo> {
 
   @override
   Widget build(BuildContext context) {
-    print(' aspect ratio: ${widget.videoPlayerController.value}');
     return Container(
       padding: const EdgeInsets.only(top: 0),
       child: Hero(

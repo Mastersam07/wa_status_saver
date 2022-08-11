@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
 
 import 'video_controller.dart';
@@ -20,7 +19,6 @@ class _PlayStatusState extends State<PlayStatus> {
   @override
   void initState() {
     super.initState();
-    print('Video file you are looking for:' + widget.videoFile);
   }
 
   @override
@@ -127,8 +125,6 @@ class _PlayStatusState extends State<PlayStatus> {
             _onLoading(true, '');
 
             final originalVideoFile = File(widget.videoFile);
-            final directory = await getExternalStorageDirectory();
-            print('directory: $directory');
             if (!Directory('/storage/emulated/0/wa_status_saver')
                 .existsSync()) {
               Directory('/storage/emulated/0/wa_status_saver')
@@ -138,7 +134,6 @@ class _PlayStatusState extends State<PlayStatus> {
             final curDate = DateTime.now().toString();
             final newFileName =
                 '/storage/emulated/0/wa_status_saver/VIDEO-$curDate.mp4';
-            print(newFileName);
             await originalVideoFile.copy(newFileName);
 
             _onLoading(
